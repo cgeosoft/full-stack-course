@@ -34,10 +34,36 @@
   - Set the parameters: temperature = 0.7, max length = 300, top p = 1.0, presence penalty = 0.0
   - Evaluate the result
 
-## OpenAI SDK Implementation
+## Implementation using OpenAI SDK
 
 - Simple implementation using [openai](https://www.npmjs.com/package/openai) sdk
 - Explain (./scripts/openai.js) script
+
+```javascript
+import OpenAI from 'openai';
+import { readFile, writeFile } from 'fs/promises'
+
+const article = await readFile('./tmp/article.txt', 'utf-8')
+
+const openai = new OpenAI({
+    apiKey: process.env['OPENAI_API_KEY'],
+});
+
+const chatCompletion = await openai.chat.completions.create({
+    messages: [{
+        role: 'user',
+        content: `
+          Write a concise summary of the following:
+
+          ${article}
+        `
+    }],
+    model: 'gpt-3.5-turbo',
+});
+
+await writeFile('./tmp/summary.txt', chatCompletion.choices[0].message.content, 'utf-8')
+```
+
 - Run `node openai.js` to test the script
 - Evaluate the result
 - Run `node stats.js` to get the stats
@@ -47,7 +73,7 @@
   - Prompt Templates
   - Vendor lock-in
 
-## LangchainJS Implementation
+## Implementation using LangChain.js
 
 - Introduce [langchainjs](https://www.npmjs.com/package/langchain)
 - Explain (./scripts/langchain.js) script
