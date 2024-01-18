@@ -21,6 +21,25 @@
 - The advantage of this approach is that it can generate more fluent summaries.
 - The disadvantage is that it is more difficult to train a model to generate coherent summaries.
 
+### Example
+
+Prompt:
+
+> Write a concise summary of the following:
+> 
+> The bright sun shines in the clear blue sky, casting warm rays that make the green grass sparkle and the colorful flowers bloom, while happy birds chirp and flutter around the tall trees, creating a peaceful and serene atmosphere.
+>
+> ----
+> Prompt Words: 46
+> Sentence Words: 39
+
+Response:
+
+> Sunny day: Clear sky, vibrant colors, chirping birds, serene ambiance.
+>
+> ----
+> Words: 10 ~ 25% of the original text
+
 ## Test with OpenAI Playground
 
 - Navigate to [OpenAI Playground](https://platform.openai.com/playground?mode=chat&model=gpt-3.5-turbo)
@@ -34,37 +53,11 @@
   - Set the parameters: temperature = 0.7, max length = 300, top p = 1.0, presence penalty = 0.0
   - Evaluate the result
 
-## Implementation using OpenAI SDK
+## Implementation
 
 - Simple implementation using [openai](https://www.npmjs.com/package/openai) sdk
-- Explain (./scripts/openai.js) script
-
-```javascript
-import OpenAI from 'openai';
-import { readFile, writeFile } from 'fs/promises'
-
-const article = await readFile('./tmp/article.txt', 'utf-8')
-
-const openai = new OpenAI({
-    apiKey: process.env['OPENAI_API_KEY'],
-});
-
-const chatCompletion = await openai.chat.completions.create({
-    messages: [{
-        role: 'user',
-        content: `
-          Write a concise summary of the following:
-
-          ${article}
-        `
-    }],
-    model: 'gpt-3.5-turbo',
-});
-
-await writeFile('./tmp/summary.txt', chatCompletion.choices[0].message.content, 'utf-8')
-```
-
-- Run `node openai.js` to test the script
+- Explain (./scripts/summarization.js)
+- Run `node ./scripts/summarization.js` to test the script
 - Evaluate the result
 - Run `node stats.js` to get the stats
 - Challenges with the openai sdk approach
@@ -73,18 +66,24 @@ await writeFile('./tmp/summary.txt', chatCompletion.choices[0].message.content, 
   - Prompt Templates
   - Vendor lock-in
 
-## Implementation using LangChain.js
+## Improvements
+
+- Navigate to https://platform.openai.com/tokenizer
+- HTML to text conversion - less tokens
+- Test different models (GPT-4)
+- Test different parameters
+- Test different prompts
+
+## LangChain.js vs OpenAI
 
 - Introduce [langchainjs](https://www.npmjs.com/package/langchain)
-- Explain (./scripts/langchain.js) script
-- Run `node langchain.js` to test the script
+- Langchainjs is a framework for building applications that use NLP models to process text.
+- It provides a simple interface for building applications that use NLP models to process text.
 
-## Add the module to project
+### Solution Comparison
 
-- Add the module to the project
-- Run the whole process against a new article
-- Evaluate the result
-- Run `node stats.js` to get the stats
-- Challenges with the langchainjs approach
-  - Limited by the community
-  - More boilerplate code
+| OpenAI                    | LangChain.js              |
+| ------------------------- | ------------------------- |
+| Limited to OpenAI models  | Supports multiple models  |
+| Low level abstraction     | High level abstraction    |
+| Instant Access Latest API | Community driven adoption |
