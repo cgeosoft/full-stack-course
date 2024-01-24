@@ -40,7 +40,12 @@ Response:
 > ----
 > Words: 10 ~ 25% of the original text
 
-## Test with OpenAI Playground
+### LLM Visualization
+
+- Present [LLM Visualization](https://bbycroft.net/llm)
+- Talk about tokens
+
+## Test with Playground
 
 - Navigate to [OpenAI Playground](https://platform.openai.com/playground?mode=chat&model=gpt-3.5-turbo)
 - Explain Model Parameters
@@ -53,7 +58,7 @@ Response:
   - Set the parameters: temperature = 0.7, max length = 300, top p = 1.0, presence penalty = 0.0
   - Evaluate the result
 
-## Implementation
+## Code Implementation
 
 - Simple implementation using [openai](https://www.npmjs.com/package/openai) sdk
 - Explain (./scripts/summarization.js)
