@@ -20,10 +20,11 @@ const messages = [{
   content: prompt
 }]
 
-const chatCompletion = await openai.chat.completions.create({
-  messages,
-  model,
-});
+const chatCompletion = await openai.chat.completions
+  .create({
+    messages,
+    model,
+  });
 
 const summary = chatCompletion.choices[0].message.content
 

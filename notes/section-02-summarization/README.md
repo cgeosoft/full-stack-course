@@ -1,6 +1,6 @@
 # Section no2 - Summarization
 
-## Definition
+## Summary
 
 > Definition: A summary is a short version of a text. It should be is a concise version of the original text.
 
@@ -40,12 +40,14 @@ Response:
 > ----
 > Words: 10 ~ 25% of the original text
 
-### LLM Visualization
+## LLM Models
+
+### Visualization
 
 - Present [LLM Visualization](https://bbycroft.net/llm)
 - Talk about tokens
 
-## Test with Playground
+### Test with Playground
 
 - Navigate to [OpenAI Playground](https://platform.openai.com/playground?mode=chat&model=gpt-3.5-turbo)
 - Explain Model Parameters
@@ -58,7 +60,7 @@ Response:
   - Set the parameters: temperature = 0.7, max length = 300, top p = 1.0, presence penalty = 0.0
   - Evaluate the result
 
-## Code Implementation
+## Code
 
 - Simple implementation using [openai](https://www.npmjs.com/package/openai) sdk
 - Explain (./scripts/summarization.js)
@@ -71,7 +73,7 @@ Response:
   - Prompt Templates
   - Vendor lock-in
 
-## Improvements
+### Improvements
 
 - Navigate to https://platform.openai.com/tokenizer
 - HTML to text conversion - less tokens
@@ -79,7 +81,7 @@ Response:
 - Test different parameters
 - Test different prompts
 
-## LangChain.js vs OpenAI
+### LangChain.js vs OpenAI
 
 - Introduce [langchainjs](https://www.npmjs.com/package/langchain)
 - Langchainjs is a framework for building applications that use NLP models to process text.
